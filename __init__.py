@@ -12,7 +12,8 @@ bl_info = {
 }
 
 
-from . import ui, operators
+from .operators import register_operators, unregister_operators
+from .ui import register_ui, unregister_ui
 
 
 def register():
