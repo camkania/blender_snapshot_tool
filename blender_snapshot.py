@@ -1,9 +1,10 @@
 import bpy
 import bmesh
 from mathutils import Matrix
+import time 
 
 def create_snapshot_collection(base_name):
-    collection_name = f"{base_name}_Snapshots"
+    collection_name = f"{base_name}"
     if collection_name not in bpy.data.collections:
         new_collection = bpy.data.collections.new(collection_name)
         bpy.context.scene.collection.children.link(new_collection)
@@ -39,7 +40,8 @@ def set_active_collection(layer_collection, collection_name):
     return False
 
 def create_snapshots(obj_names):
-    snapshot_collection = create_snapshot_collection("Snapshot_Meshes")
+    start_time = time.time()
+    snapshot_collection = create_snapshot_collection("Snapshot")
     
     start_frame = bpy.context.scene.frame_start
     end_frame = bpy.context.scene.frame_end
@@ -61,8 +63,11 @@ def create_snapshots(obj_names):
     
     layer_collection = bpy.context.view_layer.layer_collection
     set_active_collection(layer_collection, snapshot_collection.name)
+    end_time = time.time()
+    elapsed_time = end_time - start_time
     
     print("Snapshot creation complete!")
+    print(f"Execution time: {elapsed_time:.2f} seconds")
 
 # Add the meshes you want to this list
 object_names = [
