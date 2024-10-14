@@ -11,13 +11,25 @@ bl_info = {
     "category": "Add Mesh",  
 }
 
-from .operators import *
-from .ui import *
+
+from . import ui, operators
+
 
 def register():
-    # Register your operators and panels here
-    pass
+    bpy.utils.register_class(SnapshotToolProperties)
+    bpy.types.Scene.snapshot_tool = bpy.props.PointerProperty(type=SnapshotToolProperties)
+    
+    register_ui()
+    register_operators()
 
 def unregister():
-    # Unregister your operators and panels here
-    pass
+    unregister_ui()
+    unregister_operators()
+    
+    del bpy.types.Scene.snapshot_tool
+    bpy.utils.unregister_class(SnapshotToolProperties)
+
+# This allows you to run the script directly from Blender's Text editor
+# to test the add-on without having to install it.
+if __name__ == "__main__":
+    register()
