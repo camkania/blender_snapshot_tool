@@ -39,6 +39,9 @@ def set_active_collection(layer_collection, collection_name):
             return True
     return False
 
+def get_selected_objects():
+    return [obj.name for obj in bpy.context.selected_objects if obj.type == 'MESH']
+
 def create_snapshots(obj_names):
     start_time = time.time()
     snapshot_collection = create_snapshot_collection("Snapshot")
@@ -88,4 +91,12 @@ object_names = [
 "counterWeight_arm"
 ]
 
-create_snapshots(object_names)
+selected_object_names = get_selected_objects()
+
+if selected_object_names:
+    print(f"Selected objects: {', '.join(selected_object_names)}")
+    create_snapshots(selected_object_names)
+else:
+    print("No mesh objects selected. Please select one or more mesh objects and run the script again.")
+
+#create_snapshots(object_names)
