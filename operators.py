@@ -1,6 +1,6 @@
 import bpy
 import bmesh
-from .util import get_selected_objects, create_snapshots, create_snapshot_collection
+from .utils import get_selected_objects, create_snapshots
 
 '''
 # Operator to save object set
@@ -42,11 +42,10 @@ class SNAPSHOT_OT_run_snapshots(bpy.types.Operator):
 
         for frame in range(tool.frame_start, tool.frame_end + 1, tool.frame_interval):
             bpy.context.scene.frame_set(frame)
-            create_snapshots(
-                obj_names,
-                snapshot_tool.frame_start, 
-                snapshot_tool.frame_end, 
-                snapshot_tool.frame_interval )
+            create_snapshots(obj_names,
+                tool.frame_start, 
+                tool.frame_end, 
+                tool.frame_interval)
         
         self.report({'INFO'}, "Snapshots completed.")
         return {'FINISHED'}
