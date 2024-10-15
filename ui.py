@@ -32,16 +32,16 @@ class SNAPSHOT_PT_main_panel(bpy.types.Panel):
         scene = context.scene
         snapshot_tool = scene.snapshot_tool
 
+        # Save/Load Object Set
+        #layout.operator("snapshot.save_objects", text="Save Object Set")
+        #layout.operator("snapshot.load_objects", text="Load Object Set")
+
         # Frame Range Input
         layout.prop(snapshot_tool, "frame_start")
         layout.prop(snapshot_tool, "frame_end")
 
         # Interval Input
         layout.prop(snapshot_tool, "frame_interval")
-
-        # Save/Load Object Set
-        #layout.operator("snapshot.save_objects", text="Save Object Set")
-        #layout.operator("snapshot.load_objects", text="Load Object Set")
 
         # Run the program
         layout.operator("snapshot.run_snapshots", text="Run Snapshot Process")
