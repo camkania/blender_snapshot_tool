@@ -1,7 +1,6 @@
 import bpy
 import bmesh
-from mathutils import Matrix
-import time 
+from mathutils import Matrix 
 
 def get_scene_start():
     return bpy.context.scene.frame_start
@@ -13,11 +12,7 @@ def get_selected_objects():
     return [obj.name for obj in bpy.context.selected_objects if obj.type == 'MESH']
 
 def create_snapshots(obj_names):
-    start_time = time.time()
     snapshot_collection = create_snapshot_collection("Snapshot_Meshes")
-    
-    #start_frame = bpy.context.scene.frame_start
-    #end_frame = bpy.context.scene.frame_end
         
     for obj_name in obj_names:
         if obj_name in bpy.data.objects:
@@ -33,11 +28,7 @@ def create_snapshots(obj_names):
     
     layer_collection = bpy.context.view_layer.layer_collection
     set_active_collection(layer_collection, snapshot_collection.name)
-    end_time = time.time()
-    elapsed_time = end_time - start_time
     
-    print("Snapshot creation complete!")
-    print(f"Execution time: {elapsed_time:.2f} seconds")
 
 def create_snapshot_collection(base_name):
     collection_name = f"{base_name}"

@@ -1,6 +1,7 @@
 import bpy
 import bmesh
 from .utils import get_selected_objects, create_snapshots
+import time
 
 '''
 # Operator to save object set
@@ -37,6 +38,8 @@ class SNAPSHOT_OT_run_snapshots(bpy.types.Operator):
     bl_idname = "snapshot.run_snapshots"
 
     def execute(self, context):
+        start_time = time.time()
+
         tool = context.scene.snapshot_tool
         obj_names = get_selected_objects()
 
@@ -44,6 +47,9 @@ class SNAPSHOT_OT_run_snapshots(bpy.types.Operator):
             bpy.context.scene.frame_set(frame)
             create_snapshots(obj_names)
         
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Execution time: {elapsed_time:.2f} seconds")
         self.report({'INFO'}, "Snapshots completed.")
         return {'FINISHED'}
 
