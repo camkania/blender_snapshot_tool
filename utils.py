@@ -12,27 +12,24 @@ def get_scene_end():
 def get_selected_objects():
     return [obj.name for obj in bpy.context.selected_objects if obj.type == 'MESH']
 
-def create_snapshots(obj_names, frame_start, frame_end, frame_interval):
+def create_snapshots(obj_names):
     start_time = time.time()
     snapshot_collection = create_snapshot_collection("Snapshot_Meshes")
     
     #start_frame = bpy.context.scene.frame_start
     #end_frame = bpy.context.scene.frame_end
-    
-    for frame in range(frame_start, frame_end + 1, frame_interval):
-        bpy.context.scene.frame_set(frame)
         
-        for obj_name in obj_names:
-            if obj_name in bpy.data.objects:
-                obj = bpy.data.objects[obj_name]
-                new_mesh = create_mesh(obj, frame)
-                new_obj = bpy.data.objects.new(f"{obj_name}_Frame_{frame}", new_mesh)
-                snapshot_collection.objects.link(new_obj)
-                
-                # Set the new object's transform to identity
-                new_obj.matrix_world = Matrix.Identity(4)
-            else:
-                print(f"Warning: Object '{obj_name}' not found in the scene.")
+    for obj_name in obj_names:
+        if obj_name in bpy.data.objects:
+            obj = bpy.data.objects[obj_name]
+            new_mesh = create_mesh(obj, frame)
+            new_obj = bpy.data.objects.new(f"{obj_name}_Frame_{frame}", new_mesh)
+            snapshot_collection.objects.link(new_obj)
+            
+            # Set the new object's transform to identity
+            new_obj.matrix_world = Matrix.Identity(4)
+        else:
+            print(f"Warning: Object '{obj_name}' not found in the scene.")
     
     layer_collection = bpy.context.view_layer.layer_collection
     set_active_collection(layer_collection, snapshot_collection.name)

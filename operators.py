@@ -42,10 +42,7 @@ class SNAPSHOT_OT_run_snapshots(bpy.types.Operator):
 
         for frame in range(tool.frame_start, tool.frame_end + 1, tool.frame_interval):
             bpy.context.scene.frame_set(frame)
-            create_snapshots(obj_names,
-                tool.frame_start, 
-                tool.frame_end, 
-                tool.frame_interval)
+            create_snapshots(obj_names)
         
         self.report({'INFO'}, "Snapshots completed.")
         return {'FINISHED'}
