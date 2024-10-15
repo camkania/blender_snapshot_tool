@@ -3,6 +3,12 @@ import bmesh
 from mathutils import Matrix
 import time 
 
+def get_scene_start():
+    return bpy.context.scene.frame_start
+
+def get_scene_end():
+    return bpy.context.scene.frame_end
+    
 def get_selected_objects():
     return [obj.name for obj in bpy.context.selected_objects if obj.type == 'MESH']
 

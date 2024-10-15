@@ -1,15 +1,18 @@
 import bpy
+from .utils import get_scene_start, get_scene_end
 
 class SnapshotToolProperties(bpy.types.PropertyGroup):
     frame_start: bpy.props.IntProperty(
         name="Start Frame",
         description="Start frame for snapshots",
-        default=lambda: bpy.context.scene.frame_start
+        default=get_scene_start,
+        min=0
     )
     frame_end: bpy.props.IntProperty(
         name="End Frame",
         description="End frame for snapshots",
-        default=lambda: bpy.context.scene.frame_end
+        default=get_scene_end,
+        min=1
     )
     frame_interval: bpy.props.IntProperty(
         name="Frame Interval",
