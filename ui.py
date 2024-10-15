@@ -5,13 +5,13 @@ class SnapshotToolProperties(bpy.types.PropertyGroup):
     frame_start: bpy.props.IntProperty(
         name="Start Frame",
         description="Start frame for snapshots",
-        default=get_scene_start,
+        default=0,
         min=0
     )
     frame_end: bpy.props.IntProperty(
         name="End Frame",
         description="End frame for snapshots",
-        default=get_scene_end,
+        default=90,
         min=1
     )
     frame_interval: bpy.props.IntProperty(
