@@ -11,7 +11,7 @@ bl_info = {
     "category": "Add Mesh",  
 }
 
-
+import bpy
 from .operators import register_operators, unregister_operators
 from .ui import register_ui, unregister_ui
 
