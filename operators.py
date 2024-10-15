@@ -50,7 +50,7 @@ class SNAPSHOT_OT_run_snapshots(bpy.types.Operator):
         self.report({'INFO'}, "Snapshots completed.")
         return {'FINISHED'}
 
-'''
+
 class SNAPSHOT_OT_combine_meshes(bpy.types.Operator):
     bl_label = "Combine Snapshots into Mesh"
     bl_idname = "snapshot.combine_meshes"
@@ -75,14 +75,14 @@ class SNAPSHOT_OT_combine_meshes(bpy.types.Operator):
         self.report({'INFO'}, "Meshes combined.")
         return {'FINISHED'}
 
-'''
+
 
 # Register and unregister functions
 classes = [
     #SNAPSHOT_OT_save_objects,
     #SNAPSHOT_OT_load_objects,
     SNAPSHOT_OT_run_snapshots,
-    #SNAPSHOT_OT_combine_meshes
+    SNAPSHOT_OT_combine_meshes
 ]
 
 def register_operators():
