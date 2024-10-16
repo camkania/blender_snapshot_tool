@@ -1,6 +1,6 @@
 import bpy
 import bmesh
-from .utils import get_selected_objects, create_snapshots
+from .utils import *
 import time
 
 '''
@@ -38,6 +38,7 @@ class SNAPSHOT_OT_run_snapshots(bpy.types.Operator):
     bl_idname = "snapshot.run_snapshots"
 
     def execute(self, context):
+        context.scene.snapshot_tool.snapshot_created = True
         start_time = time.time()
 
         tool = context.scene.snapshot_tool

@@ -19,6 +19,11 @@ class SnapshotToolProperties(bpy.types.PropertyGroup):
         description="Interval between frames for snapshots",
         default=1
     )
+    snapshot_created: bpy.props.BoolProperty(
+        name="Snapshot Created",
+        description="Tracks if the snapshot has been created",
+        default=False
+        )
 
 class SNAPSHOT_PT_main_panel(bpy.types.Panel):
     bl_label = "Snapshot Tool"
@@ -31,6 +36,7 @@ class SNAPSHOT_PT_main_panel(bpy.types.Panel):
         layout = self.layout
         scene = context.scene
         snapshot_tool = scene.snapshot_tool
+        
 
         # Save/Load Object Set
         #layout.operator("snapshot.save_objects", text="Save Object Set")
@@ -47,7 +53,8 @@ class SNAPSHOT_PT_main_panel(bpy.types.Panel):
         layout.operator("snapshot.run_snapshots", text="Run Snapshot Process")
 
         # Combine meshes
-        layout.operator("snapshot.combine_meshes", text="Combine Snapshots into Mesh")
+        combined_op = layout.operator("snapshot.combine_meshes", text="Combine Snapshots into Mesh")
+        combined_op.enabled = snapshot_tool.snapshot_created
 
 
 # Registering the custom properties and UI panel
