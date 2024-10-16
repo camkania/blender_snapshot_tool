@@ -66,7 +66,7 @@ def set_active_collection(layer_collection, collection_name):
             return True
     return False
 
-def combine_snapshots(keep_seperated_meshes=True):
+def combine_snapshots(keep_separated_meshes):
     snapshot_collection = bpy.data.collections.get("Snapshot_Meshes")
     
     if not snapshot_collection:
