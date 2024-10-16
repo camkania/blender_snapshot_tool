@@ -66,3 +66,34 @@ def set_active_collection(layer_collection, collection_name):
             return True
     return False
 
+def combine_snapshots(keep_originals=True):
+    snapshot_collection = bpy.data.collections.get("Snapshot_Meshes")
+    
+    if not snapshot_collection:
+        return None, "No snapshot collection found."
+
+    combined_mesh = bpy.data.meshes.new(name="Combined_Snapshot")
+    bm_combined = bmesh.new()
+
+    for obj in snapshot_collection.objects:
+        if obj.type == 'MESH':
+            bm_temp = bmesh.new()
+            bm_temp.from_mesh(obj.data)
+            bm_temp.transform(obj.matrix_world)
+            bm_combined.from_mesh(obj.data)
+            bm_temp.free()
+
+    bm_combined.to_mesh(combined_mesh)
+    combined_mesh.update()
+    
+    new_obj = bpy.data.objects.new("Combined_Snapshot", combined_mesh)
+    bpy.context.scene.collection.objects.link(new_obj)
+    
+    bm_combined.free()
+
+    # Remove original snapshot objects
+    if not keep_seperated_meshes:
+        for obj in snapshot_collection.objects:
+            bpy.data.objects.remove(obj, do_unlink=True)
+
+    return new_obj, "Meshes combined successfully."

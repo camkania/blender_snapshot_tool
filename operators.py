@@ -66,23 +66,14 @@ class SNAPSHOT_OT_combine_meshes(bpy.types.Operator):
 
 
     def execute(self, context):
-        snapshot_collection = create_snapshot_collection("Snapshot")
-        combined_mesh = bpy.data.meshes.new(name="Combined_Mesh")
-        bm_combined = bmesh.new()
-
-        for obj in snapshot_collection.objects:
-            if obj.type == 'MESH':
-                bm_temp = bmesh.new()
-                bm_temp.from_mesh(obj.data)
-                bm_combined.from_mesh(obj.data)
-                bm_temp.free()
-
-        bm_combined.to_mesh(combined_mesh)
-        new_obj = bpy.data.objects.new("Combined_Snapshot", combined_mesh)
-        context.scene.collection.objects.link(new_obj)
-        bm_combined.free()
-
-        self.report({'INFO'}, "Meshes combined.")
+        tool = context.scene.snapshot_tool
+        new_obj, message = combine_snapshots(keep_seperated_meshes=tool.keep_seperated_meshes)
+        
+        if new_obj is None:
+            self.report({'ERROR'}, message)
+            return {'CANCELLED'}
+        
+        self.report({'INFO'}, message)
         return {'FINISHED'}
 
 
