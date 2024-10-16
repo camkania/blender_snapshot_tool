@@ -43,8 +43,9 @@ class SNAPSHOT_PT_main_panel(bpy.types.Panel):
         #layout.operator("snapshot.load_objects", text="Load Object Set")
 
         # Frame Range Input
-        layout.prop(snapshot_tool, "frame_start")
-        layout.prop(snapshot_tool, "frame_end")
+        row = layout.row()
+        row.prop(snapshot_tool, "frame_start")
+        row.prop(snapshot_tool, "frame_end")
 
         # Interval Input
         layout.prop(snapshot_tool, "frame_interval")
