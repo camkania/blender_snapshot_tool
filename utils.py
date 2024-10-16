@@ -11,7 +11,7 @@ def get_scene_end():
 def get_selected_objects():
     return [obj.name for obj in bpy.context.selected_objects if obj.type == 'MESH']
 
-def create_snapshots(obj_names):
+def create_snapshots(obj_names, frame):
     snapshot_collection = create_snapshot_collection("Snapshot_Meshes")
         
     for obj_name in obj_names:
@@ -65,3 +65,4 @@ def set_active_collection(layer_collection, collection_name):
         if set_active_collection(child, collection_name):
             return True
     return False
+

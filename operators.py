@@ -46,7 +46,7 @@ class SNAPSHOT_OT_run_snapshots(bpy.types.Operator):
 
         for frame in range(tool.frame_start, tool.frame_end + 1, tool.frame_interval):
             bpy.context.scene.frame_set(frame)
-            create_snapshots(obj_names)
+            create_snapshots(obj_names, frame)
         
         end_time = time.time()
         elapsed_time = end_time - start_time
