@@ -61,9 +61,11 @@ class SNAPSHOT_PT_main_panel(bpy.types.Panel):
         # Combine meshes
         combined_op = layout.operator("snapshot.combine_meshes", text="Combine Snapshots")
         combined_op.enabled = snapshot_tool.snapshot_created
-        
+
         # Keep Seperated Meshes option
-        layout.prop(snapshot_tool, "Keep Seperated Meshes")
+        layout.prop(snapshot_tool, "keep_seperated_meshes")
+        
+
 
 
 # Registering the custom properties and UI panel
