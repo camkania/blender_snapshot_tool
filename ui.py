@@ -58,12 +58,12 @@ class SNAPSHOT_PT_main_panel(bpy.types.Panel):
         # Run the program
         layout.operator("snapshot.run_snapshots", text="Run Snapshot Process")
 
-        layout.prop(snapshot_tool, "keep_separated_meshes")
 
         # Combine meshes
         combined_op = layout.operator("snapshot.combine_meshes", text="Combine Snapshots")
         combined_op.enabled = snapshot_tool.snapshot_created
-        
+
+        layout.prop(snapshot_tool, "keep_separated_meshes")        
 
 # Registering the custom properties and UI panel
 def register_ui():

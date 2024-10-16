@@ -67,7 +67,7 @@ class SNAPSHOT_OT_combine_meshes(bpy.types.Operator):
 
     def execute(self, context):
         tool = context.scene.snapshot_tool
-        new_obj, message = combine_snapshots(keep_seperated_meshes=tool.keep_seperated_meshes)
+        new_obj, message = combine_snapshots(keep_separated_meshes=tool.keep_separated_meshes)
         
         if new_obj is None:
             self.report({'ERROR'}, message)
