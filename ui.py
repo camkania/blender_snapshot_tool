@@ -53,7 +53,7 @@ class SNAPSHOT_PT_main_panel(bpy.types.Panel):
         layout.operator("snapshot.run_snapshots", text="Run Snapshot Process")
 
         # Combine meshes
-        combined_op = layout.operator("snapshot.combine_meshes", text="Combine Snapshots into Mesh")
+        combined_op = layout.operator("snapshot.combine_meshes", text="Combine Snapshots")
         combined_op.enabled = snapshot_tool.snapshot_created
 
 

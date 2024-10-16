@@ -38,7 +38,6 @@ class SNAPSHOT_OT_run_snapshots(bpy.types.Operator):
     bl_idname = "snapshot.run_snapshots"
 
     def execute(self, context):
-        context.scene.snapshot_tool.snapshot_created = True
         start_time = time.time()
 
         tool = context.scene.snapshot_tool
@@ -47,6 +46,8 @@ class SNAPSHOT_OT_run_snapshots(bpy.types.Operator):
         for frame in range(tool.frame_start, tool.frame_end + 1, tool.frame_interval):
             bpy.context.scene.frame_set(frame)
             create_snapshots(obj_names, frame)
+        
+        tool.snapshot_created = True       
         
         end_time = time.time()
         elapsed_time = end_time - start_time
@@ -58,6 +59,11 @@ class SNAPSHOT_OT_run_snapshots(bpy.types.Operator):
 class SNAPSHOT_OT_combine_meshes(bpy.types.Operator):
     bl_label = "Combine Snapshots into Mesh"
     bl_idname = "snapshot.combine_meshes"
+
+    @classmethod
+    def poll(cls, context):
+        return context.scene.snapshot_tool.snapshot_created
+
 
     def execute(self, context):
         snapshot_collection = create_snapshot_collection("Snapshot")
