@@ -92,7 +92,7 @@ def combine_snapshots(keep_separated_meshes):
     bm_combined.free()
 
     # Remove original snapshot objects
-    if not keep_seperated_meshes:
+    if not keep_separated_meshes:
         for obj in snapshot_collection.objects:
             bpy.data.objects.remove(obj, do_unlink=True)
 
