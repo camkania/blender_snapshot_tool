@@ -86,14 +86,13 @@ def combine_snapshots(keep_separated_meshes):
     bm_combined.to_mesh(combined_mesh)
     combined_mesh.update()
     
-    new_obj = bpy.data.objects.new("Combined_Snapshot", combined_mesh)
-    bpy.context.scene.collection.objects.link(new_obj)
-    
-    bm_combined.free()
-
     # Remove original snapshot objects
     if not keep_separated_meshes:
         for obj in snapshot_collection.objects:
             bpy.data.objects.remove(obj, do_unlink=True)
+
+    new_obj = bpy.data.objects.new("Combined_Snapshot", combined_mesh)
+    snapshot_collection.objects.link(new_obj)
+    bm_combined.free()
 
     return new_obj, "Meshes combined successfully."
