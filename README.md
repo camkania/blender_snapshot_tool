@@ -1,6 +1,10 @@
 # **Animation Snapshot Tool**
 Snapshots the selected animated objects over a given frame range and interval  
 
+![Snapshot Tool in Action](screenshots/snapshot_grid.png)
+*Fig 1: Screenshot of a combined snapshot*
+
+
 ## *Install the Add-on* 
 - Download a zip of the repo from Github: Code --> Download Zip
 - In Blender Go to: Edit --> Preferences --> Add-ons --> Down Arrow (Upper Right Menu Corner) --> Install From Disk...
